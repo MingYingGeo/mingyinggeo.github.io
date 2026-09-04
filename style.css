@@ -1,0 +1,410 @@
+/* ============================================================
+   MINGYING GEO — 樣式表 (style.css)
+   ------------------------------------------------------------
+   一般不需要修改這個檔案。
+   要新增/修改「文字內容」（產品、案件、教學文章、聯絡資訊等），
+   請改 data.js；網站互動邏輯在 app.js。
+   ============================================================ */
+
+:root{
+  --navy-900:#0B2B47;
+  --navy:#0B3D6D;
+  --navy-700:#134A80;
+  --teal:#1696A6;
+  --teal-tint:#E4F3F4;
+  --orange:#E56C13;
+  --bg:#F5F7F8;
+  --surface:#FFFFFF;
+  --ink:#152430;
+  --ink-muted:#5B6B75;
+  --line:#DFE6E9;
+  --brand-gradient: linear-gradient(90deg, var(--navy) 0%, var(--teal) 55%, var(--orange) 100%);
+  --radius: 6px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","Outfit",-apple-system,sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:"Outfit","Noto Sans TC",sans-serif;
+  color:var(--navy);
+  line-height:1.3;
+  margin:0;
+}
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:inherit; cursor:pointer; }
+img{ display:block; max-width:100%; }
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+:focus-visible{
+  outline:2px solid var(--orange);
+  outline-offset:2px;
+}
+
+.wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 28px;
+}
+
+/* ---------- Header ---------- */
+header.site-header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:14px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:none;
+  border:0;
+  padding:0;
+  text-align:left;
+}
+.brand img{ height:44px; width:auto; }
+.brand-type{ display:flex; flex-direction:column; gap:2px; }
+.brand-name{
+  font-family:"Outfit",sans-serif;
+  font-weight:700;
+  font-size:1.28rem;
+  letter-spacing:0.01em;
+  color:var(--navy);
+}
+.brand-name .geo{ color:var(--teal); }
+.brand-tagline{
+  font-size:0.72rem;
+  color:var(--ink-muted);
+  letter-spacing:0.04em;
+}
+
+.menu-area{ position:relative; }
+.menu-toggle{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:var(--navy);
+  color:#fff;
+  border:1px solid var(--navy);
+  border-radius:999px;
+  padding:9px 18px 9px 16px;
+  font-size:0.92rem;
+  font-weight:500;
+  transition:background .15s ease, transform .15s ease;
+}
+.menu-toggle:hover{ background:var(--navy-700); }
+.menu-toggle .bars{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  width:16px;
+}
+.menu-toggle .bars span{
+  display:block;
+  height:2px;
+  background:#fff;
+  border-radius:1px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.menu-toggle[aria-expanded="true"] .bars span:nth-child(1){ transform:translateY(5px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .bars span:nth-child(2){ opacity:0; }
+.menu-toggle[aria-expanded="true"] .bars span:nth-child(3){ transform:translateY(-5px) rotate(-45deg); }
+
+.menu-panel{
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  width:280px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 12px 28px -14px rgba(11,45,71,0.28);
+  padding:8px;
+  opacity:0;
+  transform:translateY(-6px);
+  pointer-events:none;
+  transition:opacity .16s ease, transform .16s ease;
+}
+.menu-panel.open{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.menu-panel a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 12px;
+  border-radius:4px;
+  color:var(--ink);
+  font-size:0.96rem;
+  font-weight:500;
+}
+.menu-panel a + a{ border-top:1px solid var(--line); }
+.menu-panel a:hover{ background:var(--teal-tint); color:var(--navy); }
+.menu-panel a.active{ color:var(--teal); }
+.menu-panel svg{ flex:none; width:19px; height:19px; stroke:currentColor; }
+.menu-panel .item-desc{
+  display:block;
+  font-size:0.74rem;
+  color:var(--ink-muted);
+  font-weight:400;
+  margin-top:2px;
+}
+.menu-panel a:hover .item-desc,
+.menu-panel a.active .item-desc{ color:inherit; opacity:.75; }
+
+.brand-line{
+  height:3px;
+  background:var(--brand-gradient);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding:64px 0 0;
+}
+.hero-inner{ max-width:640px; }
+.hero h1{
+  font-size:clamp(1.9rem, 3.6vw, 2.7rem);
+  font-weight:800;
+  letter-spacing:-0.01em;
+}
+.hero p.lead{
+  margin-top:20px;
+  font-size:1.03rem;
+  color:var(--ink-muted);
+  max-width:56ch;
+}
+
+.ridge{
+  display:block;
+  width:100%;
+  height:auto;
+  margin-top:48px;
+}
+
+.quicklinks{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin-bottom:64px;
+}
+.quicklinks button{
+  background:var(--surface);
+  border:0;
+  text-align:left;
+  padding:22px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  color:var(--ink);
+}
+.quicklinks button:hover{ background:var(--teal-tint); }
+.quicklinks svg{ width:22px; height:22px; stroke:var(--teal); }
+.quicklinks .ql-title{ font-weight:700; color:var(--navy); font-size:0.98rem; }
+.quicklinks .ql-desc{ font-size:0.8rem; color:var(--ink-muted); line-height:1.55; }
+
+/* ---------- Main sections ---------- */
+main{ min-height:40vh; }
+.view{ display:none; padding:8px 0 80px; }
+.view.active{ display:block; }
+
+.section-head{
+  margin-bottom:36px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+.section-head h2{
+  font-size:1.7rem;
+  font-weight:700;
+}
+.section-head p{
+  margin-top:10px;
+  color:var(--ink-muted);
+  max-width:60ch;
+}
+
+/* products */
+.product-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.product-card{
+  background:var(--surface);
+  padding:28px;
+}
+.product-card .tag{
+  display:inline-block;
+  font-size:0.72rem;
+  font-weight:500;
+  color:var(--teal);
+  background:var(--teal-tint);
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:14px;
+}
+.product-card svg{ width:26px; height:26px; stroke:var(--navy); margin-bottom:14px; }
+.product-card h3{ font-size:1.08rem; font-weight:700; margin-bottom:8px; }
+.product-card p{ color:var(--ink-muted); font-size:0.92rem; }
+
+/* list rows: cases & tutorials */
+.row-list{ border-top:1px solid var(--line); }
+.row-item{
+  display:grid;
+  grid-template-columns:120px 1fr auto;
+  gap:24px;
+  align-items:start;
+  padding:26px 0;
+  border-bottom:1px solid var(--line);
+}
+.row-item .row-tag{
+  font-size:0.76rem;
+  font-weight:500;
+  color:var(--navy);
+  background:var(--teal-tint);
+  padding:4px 10px;
+  border-radius:999px;
+  display:inline-block;
+  white-space:nowrap;
+  width:fit-content;
+}
+.row-item.level-advanced .row-tag{ color:#8A4200; background:#FBEADB; }
+.row-item h3{ font-size:1.05rem; font-weight:700; margin-bottom:8px; }
+.row-item p{ color:var(--ink-muted); font-size:0.92rem; }
+.row-item .row-date{
+  font-variant-numeric:tabular-nums;
+  color:var(--ink-muted);
+  font-size:0.86rem;
+  white-space:nowrap;
+}
+a.row-date:hover{ color:var(--teal); }
+
+/* empty state (shown when a data.js list is emptied) */
+.empty-state{
+  padding:40px 0;
+  color:var(--ink-muted);
+  font-size:0.92rem;
+  border-bottom:1px solid var(--line);
+}
+
+/* about */
+.about-layout{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:48px;
+}
+.about-copy p + p{ margin-top:16px; }
+.about-copy p{ color:var(--ink-muted); }
+.about-panel{
+  border:1px solid var(--line);
+  padding:26px;
+  align-self:start;
+}
+.about-panel dt{
+  font-size:0.78rem;
+  color:var(--ink-muted);
+  margin-top:18px;
+}
+.about-panel dt:first-child{ margin-top:0; }
+.about-panel dd{
+  margin:4px 0 0;
+  font-weight:600;
+  color:var(--navy);
+  font-size:0.95rem;
+}
+
+/* ---------- Footer (persistent info bar) ---------- */
+footer.site-footer{
+  background:var(--navy-900);
+  color:#CBD8E0;
+  border-top:3px solid transparent;
+  border-image:var(--brand-gradient) 1;
+}
+.footer-inner{
+  padding:52px 0 28px;
+  display:grid;
+  grid-template-columns:1.1fr 1fr auto;
+  gap:40px;
+}
+.footer-brand{ display:flex; align-items:flex-start; gap:12px; }
+.footer-brand img{ height:36px; }
+.footer-brand-name{ font-family:"Outfit",sans-serif; font-weight:700; color:#fff; font-size:1.05rem; }
+.footer-brand-sub{ font-size:0.78rem; color:#8FA4B2; margin-top:4px; }
+
+.footer-heading{
+  font-size:0.78rem;
+  color:#8FA4B2;
+  margin-bottom:14px;
+  font-weight:500;
+}
+.footer-contact li{ font-size:0.9rem; margin-bottom:9px; display:flex; gap:9px; }
+.footer-contact svg{ width:16px; height:16px; stroke:var(--teal); flex:none; margin-top:2px; }
+
+.footer-social{ display:flex; gap:10px; }
+.footer-social a{
+  width:38px; height:38px;
+  border:1px solid #294961;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .15s ease, background .15s ease;
+}
+.footer-social a:hover{ border-color:var(--teal); background:rgba(22,150,166,0.15); }
+.footer-social svg{ width:17px; height:17px; stroke:#CBD8E0; }
+
+.footer-bottom{
+  border-top:1px solid #1B3A54;
+  padding:18px 0;
+  font-size:0.78rem;
+  color:#7690A0;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:860px){
+  .product-grid{ grid-template-columns:1fr; }
+  .about-layout{ grid-template-columns:1fr; }
+  .footer-inner{ grid-template-columns:1fr; gap:32px; }
+  .quicklinks{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:600px){
+  .wrap{ padding:0 18px; }
+  .brand-tagline{ display:none; }
+  .quicklinks{ grid-template-columns:1fr; }
+  .row-item{ grid-template-columns:1fr; gap:8px; }
+  .row-item .row-date{ order:-1; }
+  .menu-panel{ width:260px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior:auto !important; transition:none !important; }
+}

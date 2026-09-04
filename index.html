@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINGYING GEO｜空間科技・智慧地圖・RTK・GPS</title>
+<meta name="description" content="MINGYING GEO 專注於 RTK 衛星定位、空間資訊系統（GIS）與測繪技術整合服務。">
+<link rel="icon" href="logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <button class="brand" id="logoBtn" data-target="home" aria-label="回到首頁">
+      <img src="logo-icon.png" alt="MINGYING GEO 標誌">
+      <span class="brand-type">
+        <span class="brand-name">MINGYING <span class="geo">GEO</span></span>
+        <span class="brand-tagline" data-field="tagline"></span>
+      </span>
+    </button>
+
+    <div class="menu-area">
+      <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">
+        <span class="bars"><span></span><span></span><span></span></span>
+        選單
+      </button>
+      <!-- 選單內容由 app.js 依 data.js 的 navItems 自動產生 -->
+      <nav class="menu-panel" id="menuPanel" role="menu" aria-label="主選單"></nav>
+    </div>
+  </div>
+  <div class="brand-line"></div>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section class="view active" id="view-home" data-view="home">
+    <div class="wrap hero">
+      <div class="hero-inner">
+        <h1 id="heroTitle"></h1>
+        <p class="lead" id="heroLead"></p>
+      </div>
+
+      <svg class="ridge" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0B3D6D"/>
+            <stop offset="55%" stop-color="#1696A6"/>
+            <stop offset="100%" stop-color="#E56C13"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,140 L0,90 L140,20 L260,80 L400,10 L520,75 L660,15 L820,85 L960,25 L1080,70 L1200,30 L1200,140 Z" fill="url(#ridgeGrad)" opacity="0.14"/>
+        <path d="M0,110 L140,45 L260,95 L400,35 L520,92 L660,40 L820,100 L960,50 L1080,88 L1200,55" fill="none" stroke="url(#ridgeGrad)" stroke-width="2.5"/>
+      </svg>
+
+      <!-- 快速連結由 app.js 依 data.js 的 navItems 自動產生 -->
+      <div class="quicklinks" id="quicklinksGrid"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="view" id="view-products" data-view="products">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>產品資訊</h2>
+        <p>從現場定位設備到後端資料系統，MINGYING GEO 提供一站式的空間資訊解決方案。</p>
+      </div>
+      <!-- 產品卡片由 app.js 依 data.js 的 products 自動產生 -->
+      <div class="product-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="view" id="view-cases" data-view="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>案件分享</h2>
+        <p>精選部分導入案例，了解 MINGYING GEO 如何協助不同領域的團隊落地空間資訊應用。</p>
+      </div>
+      <!-- 案例列表由 app.js 依 data.js 的 cases 自動產生 -->
+      <div class="row-list" id="casesList"></div>
+    </div>
+  </section>
+
+  <!-- TUTORIALS -->
+  <section class="view" id="view-tutorials" data-view="tutorials">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>GIS 教學區</h2>
+        <p>從基礎觀念到實務操作，累積的空間資訊教學文章，持續更新中。</p>
+      </div>
+      <!-- 教學文章列表由 app.js 依 data.js 的 tutorials 自動產生 -->
+      <div class="row-list" id="tutorialsList"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about" data-view="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>關於 MINGYING GEO</h2>
+      </div>
+      <div class="about-layout">
+        <!-- 介紹段落與右側資訊卡由 app.js 依 data.js 的 about 自動產生 -->
+        <div class="about-copy" id="aboutIntro"></div>
+        <dl class="about-panel" id="aboutPanel"></dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="logo-icon.png" alt="MINGYING GEO 標誌">
+      <div>
+        <div class="footer-brand-name">MINGYING GEO</div>
+        <div class="footer-brand-sub" data-field="tagline"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-heading">聯絡資訊</div>
+      <!-- 地址、電話、Email 由 app.js 依 data.js 的 contact 自動產生 -->
+      <ul class="footer-contact" id="footerContact"></ul>
+    </div>
+
+    <div>
+      <div class="footer-heading">社群媒體</div>
+      <!-- Facebook／YouTube 連結由 app.js 依 data.js 的 contact 自動產生 -->
+      <div class="footer-social" id="footerSocial"></div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span id="copyrightLine"></span>
+    <span data-field="tagline"></span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
