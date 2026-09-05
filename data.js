@@ -49,14 +49,14 @@ const SITE_DATA = {
       tag: "在地導覽 APP應用",
       title: "景點探索家(Spot Explorer)",
       desc: "結合GPS定位與在地導覽，帶領使用者探索社區、景點與地方特色。透過位置引導、景點介紹與互動任務，讓使用者在旅途中認識自然環境、歷史文化與在地故事，發現每一個地方獨特的魅力",
-      link: "https://drive.google.com/drive/folders/1mw3hN1KOTQ6kdMPtS0rAoUibtLCfVFJG?usp=drive_link"
+      link: ""
     },
 	 {
       icon: "target",
       tag: "旅行行程規劃 APP 應用",
       title: "旅程記事(Trip Note)",
       desc: "提供出國(國內)旅行行程規劃、景點記錄與旅程資訊整理，讓使用者輕鬆規劃並記錄每一趟旅程。",
-      link: "#"
+      link: ""
     },
     {
       icon: "grid",
@@ -151,9 +151,9 @@ const SITE_DATA = {
       tag: "Android APP",
       title: "景點探索家 Spot Explorer",
       desc: "GPS 定位景點導覽 App 安裝檔（.apk），適用 Android 手機與平板。",
-      version: "v1.0",
-      size: "25 MB",
-      link: "#"
+      version: "v1.0.0",
+      size: "59.7 MB",
+      link: "https://drive.google.com/drive/folders/1mw3hN1KOTQ6kdMPtS0rAoUibtLCfVFJG?usp=drive_link"
     },
     {
       icon: "download",
