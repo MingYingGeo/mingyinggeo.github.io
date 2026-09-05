@@ -49,7 +49,7 @@ const SITE_DATA = {
       tag: "在地導覽 APP應用",
       title: "景點探索家(Spot Explorer)",
       desc: "結合GPS定位與在地導覽，帶領使用者探索社區、景點與地方特色。透過位置引導、景點介紹與互動任務，讓使用者在旅途中認識自然環境、歷史文化與在地故事，發現每一個地方獨特的魅力",
-      link: "#"
+      link: "https://drive.google.com/drive/folders/1mw3hN1KOTQ6kdMPtS0rAoUibtLCfVFJG?usp=drive_link"
     },
 	 {
       icon: "target",
