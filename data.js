@@ -191,7 +191,7 @@ const SITE_DATA = {
 
   // 聯絡資訊／社群連結 — 請把下面替換成正式的公司資料
   contact: {
-    address: "澎湖縣馬公市....",
+    address: "澎湖縣....",
     phone: "---------",
     email: "mingyinggeo@gmail.com",
     facebook: "https://www.facebook.com/profile.php?id=61594068444281&locale=zh_TW",
