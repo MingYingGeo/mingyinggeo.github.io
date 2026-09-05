@@ -2,7 +2,7 @@
    MINGYING GEO — 網站內容資料 (data.js)
    ------------------------------------------------------------
    之後要新增或修改「產品資訊」「案件分享」「GIS教學區」
-   「關於」「聯絡資訊」，都只需要改這個檔案，
+   「程式下載」「關於」「聯絡資訊」，都只需要改這個檔案，
    不需要碰 index.html 或 app.js。
 
    規則：
@@ -10,7 +10,12 @@
    - 要新增一筆，複製其中一組 { ... }，貼上、改文字即可。
    - 要刪除一筆，把整組 { ... } 連同前後的逗號一起刪掉即可。
    - icon 欄位請填 app.js 裡 ICONS 已經定義好的名稱
-     （目前有：layers, pin, compass, info, target, grid, drone, mesh）。
+     （目前有：layers, pin, compass, info, target, grid, drone, mesh,
+     phone, email, facebook, youtube, download）。
+   - link 欄位：目前先填 "#" 就好。以後要換成連結的圖片頁、
+     介紹網頁或下載檔案網址時，把 "#" 換成完整網址即可，
+     例如 "https://example.com/case1.html"。
+     如果填的是 http 開頭的網址，會自動用新分頁開啟。
    ============================================================ */
 
 const SITE_DATA = {
@@ -29,66 +34,76 @@ const SITE_DATA = {
 
   // 上方選單、以及首頁的四個快速連結方塊，共用同一份資料
   navItems: [
-    { target: "products",  icon: "layers",  title: "產品資訊",   desc: "社區規劃、景點探索與觀光導覽解決方案" },
-    { target: "cases",     icon: "pin",     title: "案例分享",   desc: "實際導入案例與應用成果" },
-    { target: "tutorials", icon: "compass", title: "GIS/GPS教學區", desc: "空間資訊觀念與操作教學" },
-	{ target: "download",  icon: "download",title: "程式下載...", desc: "相關程式下載區...." },
-    { target: "about",     icon: "info",    title: "關於...",       desc: "團隊理念與服務範圍" }
+    { target: "products",  icon: "layers",   title: "產品資訊",      desc: "社區規劃、景點探索與觀光導覽解決方案" },
+    { target: "cases",     icon: "pin",      title: "案例分享",      desc: "實際導入案例與應用成果" },
+    { target: "tutorials", icon: "compass",  title: "GIS/GPS教學區", desc: "空間資訊觀念與操作教學" },
+    { target: "download",  icon: "download", title: "程式下載",      desc: "App 安裝檔、工具與文件下載" },
+    { target: "about",     icon: "info",     title: "關於",          desc: "團隊理念與服務範圍" }
   ],
 
   // 產品資訊頁：要新增產品，複製一組貼在陣列最後面
+  // link：以後要幫某個產品加上介紹網頁或圖片集，把 "#" 換成該網址即可
   products: [
     {
       icon: "target",
       tag: "Android APP應用",
       title: "景點探索家(Spot Explorer)",
-      desc: "結合GPS定位與在地導覽，帶領使用者探索社區、景點與地方特色。透過位置引導、景點介紹與互動任務，讓使用者在旅途中認識自然環境、歷史文化與在地故事，發現每一個地方獨特的魅力"
+      desc: "結合GPS定位與在地導覽，帶領使用者探索社區、景點與地方特色。透過位置引導、景點介紹與互動任務，讓使用者在旅途中認識自然環境、歷史文化與在地故事，發現每一個地方獨特的魅力",
+      link: "#"
     },
     {
       icon: "grid",
       tag: "系統開發",
       title: "空間資訊系統（GIS）建置",
-      desc: "整合地理資料庫與圖台介面，將分散的圖層與屬性資料集中管理，讓跨部門溝通與決策一目了然。"
+      desc: "整合地理資料庫與圖台介面，將分散的圖層與屬性資料集中管理，讓跨部門溝通與決策一目了然。",
+      link: "#"
     },
     {
       icon: "drone",
       tag: "現場服務",
       title: "空拍測繪服務",
-      desc: "以無人機航拍搭配後製建模，快速產出正射影像與數值地形模型，適用於大範圍地形調查。"
+      desc: "以無人機航拍搭配後製建模，快速產出正射影像與數值地形模型，適用於大範圍地形調查。",
+      link: "#"
     },
     {
       icon: "mesh",
       tag: "資料處理",
       title: "三維點雲建模",
-      desc: "結合光達（LiDAR）掃描與後端運算，重建地形與構造物的精細三維模型，供工程分析與展示使用。"
+      desc: "結合光達（LiDAR）掃描與後端運算，重建地形與構造物的精細三維模型，供工程分析與展示使用。",
+      link: "#"
     }
   ],
 
   // 案件分享頁：要新增案例，複製一組貼在陣列「最前面」，最新的案例就會顯示在最上方
+  // link：以後要幫某個案例加上詳細介紹頁或照片集，把 "#" 換成該網址即可
   cases: [
     {
       tag: "水利工程",
       title: "河川治理工程地形測繪",
       date: "2025.11",
-      desc: "結合 RTK 定位與空拍測繪，協助水利單位掌握河道斷面變化，作為治理工程設計依據。"
+      desc: "結合 RTK 定位與空拍測繪，協助水利單位掌握河道斷面變化，作為治理工程設計依據。",
+      link: "#"
     },
     {
       tag: "都市規劃",
       title: "都市更新地籍套繪整合",
       date: "2025.08",
-      desc: "建置地籍與地上物套繪圖層，提供都市更新單位快速比對土地權屬與現況資料。"
+      desc: "建置地籍與地上物套繪圖層，提供都市更新單位快速比對土地權屬與現況資料。",
+      link: "#"
     },
     {
       tag: "防災監測",
       title: "山區道路邊坡監測系統",
       date: "2025.05",
-      desc: "導入 GIS 平台整合邊坡監測感測器資料，協助管理單位即時掌握邊坡位移與風險狀態。"
+      desc: "導入 GIS 平台整合邊坡監測感測器資料，協助管理單位即時掌握邊坡位移與風險狀態。",
+      link: "#"
     },
     {
       tag: "能源開發",
       title: "太陽能案場選址地形分析",
       date: "2025.02",
-      desc: "以數值地形模型評估案場坡度與日照條件，協助業主完成案場初期選址評估。"
+      desc: "以數值地形模型評估案場坡度與日照條件，協助業主完成案場初期選址評估。",
+      link: "#"
     }
   ],
 
@@ -116,6 +131,39 @@ const SITE_DATA = {
       level: "進階",
       title: "無人機航拍後製：從影像到正射地圖",
       desc: "介紹空拍影像的後製處理流程，如何產出可用於分析與套疊的正射影像成果。",
+      link: "#"
+    }
+  ],
+
+  // 程式下載頁：要新增下載項目，複製一組貼在陣列最後面
+  // link：請填實際的下載檔案網址（例如放在雲端硬碟、GitHub Release 的連結）
+  // icon 建議用 phone（App／手機安裝檔）或 download（一般檔案／文件）
+  downloads: [
+    {
+      icon: "phone",
+      tag: "Android APP",
+      title: "景點探索家 Spot Explorer",
+      desc: "GPS 定位景點導覽 App 安裝檔（.apk），適用 Android 手機與平板。",
+      version: "v1.0",
+      size: "25 MB",
+      link: "#"
+    },
+    {
+      icon: "download",
+      tag: "操作手冊",
+      title: "App 使用說明手冊",
+      desc: "景點探索家 App 的功能介紹與操作步驟說明文件（PDF）。",
+      version: "v1.0",
+      size: "3.2 MB",
+      link: "#"
+    },
+    {
+      icon: "download",
+      tag: "GIS 工具",
+      title: "座標轉換小工具",
+      desc: "TWD97 與 WGS84 座標互轉小工具，桌機版（Windows）。",
+      version: "v1.0",
+      size: "8 MB",
       link: "#"
     }
   ],

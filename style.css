@@ -2,7 +2,7 @@
    MINGYING GEO — 樣式表 (style.css)
    ------------------------------------------------------------
    一般不需要修改這個檔案。
-   要新增/修改「文字內容」（產品、案件、教學文章、聯絡資訊等），
+   要新增/修改「文字內容」（產品、案件、教學文章、下載項目、聯絡資訊等），
    請改 data.js；網站互動邏輯在 app.js。
    ============================================================ */
 
@@ -18,6 +18,8 @@
   --ink:#152430;
   --ink-muted:#5B6B75;
   --line:#DFE6E9;
+  --footer-bg:#EEF3F5;
+  --footer-line:#D7E1E6;
   --brand-gradient: linear-gradient(90deg, var(--navy) 0%, var(--teal) 55%, var(--orange) 100%);
   --radius: 6px;
 }
@@ -248,7 +250,7 @@ main{ min-height:40vh; }
   max-width:60ch;
 }
 
-/* products */
+/* products (cards are <a> links — see data.js "link" field) */
 .product-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -257,9 +259,14 @@ main{ min-height:40vh; }
   border:1px solid var(--line);
 }
 .product-card{
+  display:block;
+  position:relative;
   background:var(--surface);
   padding:28px;
+  padding-bottom:44px;
+  transition:background .15s ease;
 }
+.product-card:hover{ background:var(--teal-tint); }
 .product-card .tag{
   display:inline-block;
   font-size:0.72rem;
@@ -273,8 +280,19 @@ main{ min-height:40vh; }
 .product-card svg{ width:26px; height:26px; stroke:var(--navy); margin-bottom:14px; }
 .product-card h3{ font-size:1.08rem; font-weight:700; margin-bottom:8px; }
 .product-card p{ color:var(--ink-muted); font-size:0.92rem; }
+.card-arrow{
+  position:absolute;
+  right:22px;
+  bottom:18px;
+  font-size:1.15rem;
+  color:var(--teal);
+  opacity:0;
+  transform:translateX(-4px);
+  transition:opacity .15s ease, transform .15s ease;
+}
+.product-card:hover .card-arrow{ opacity:1; transform:translateX(0); }
 
-/* list rows: cases & tutorials */
+/* list rows: cases (link) & tutorials */
 .row-list{ border-top:1px solid var(--line); }
 .row-item{
   display:grid;
@@ -283,7 +301,9 @@ main{ min-height:40vh; }
   align-items:start;
   padding:26px 0;
   border-bottom:1px solid var(--line);
+  transition:background .15s ease;
 }
+a.row-item:hover{ background:var(--teal-tint); }
 .row-item .row-tag{
   font-size:0.76rem;
   font-weight:500;
@@ -314,6 +334,48 @@ a.row-date:hover{ color:var(--teal); }
   border-bottom:1px solid var(--line);
 }
 
+/* downloads */
+.download-list{ border-top:1px solid var(--line); }
+.download-item{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:24px 0;
+  border-bottom:1px solid var(--line);
+}
+.download-item svg{ width:30px; height:30px; stroke:var(--navy); flex:none; }
+.download-info{ flex:1; min-width:0; }
+.download-info .tag{
+  display:inline-block;
+  font-size:0.72rem;
+  font-weight:500;
+  color:var(--teal);
+  background:var(--teal-tint);
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:8px;
+}
+.download-info h3{ font-size:1.02rem; font-weight:700; margin-bottom:6px; }
+.download-info p{ color:var(--ink-muted); font-size:0.9rem; }
+.download-meta{
+  display:block;
+  margin-top:6px;
+  font-size:0.78rem;
+  color:var(--ink-muted);
+  font-variant-numeric:tabular-nums;
+}
+.download-btn{
+  flex:none;
+  background:var(--orange);
+  color:#fff;
+  font-size:0.88rem;
+  font-weight:600;
+  padding:10px 22px;
+  border-radius:999px;
+  transition:background .15s ease;
+}
+.download-btn:hover{ background:#C85A0C; }
+
 /* about */
 .about-layout{
   display:grid;
@@ -340,10 +402,10 @@ a.row-date:hover{ color:var(--teal); }
   font-size:0.95rem;
 }
 
-/* ---------- Footer (persistent info bar) ---------- */
+/* ---------- Footer (persistent info bar) — light background ---------- */
 footer.site-footer{
-  background:var(--navy-900);
-  color:#CBD8E0;
+  background:var(--footer-bg);
+  color:var(--ink-muted);
   border-top:3px solid transparent;
   border-image:var(--brand-gradient) 1;
 }
@@ -355,34 +417,34 @@ footer.site-footer{
 }
 .footer-brand{ display:flex; align-items:flex-start; gap:12px; }
 .footer-brand img{ height:36px; }
-.footer-brand-name{ font-family:"Outfit",sans-serif; font-weight:700; color:#fff; font-size:1.05rem; }
-.footer-brand-sub{ font-size:0.78rem; color:#8FA4B2; margin-top:4px; }
+.footer-brand-name{ font-family:"Outfit",sans-serif; font-weight:700; color:var(--navy); font-size:1.05rem; }
+.footer-brand-sub{ font-size:0.78rem; color:var(--ink-muted); margin-top:4px; }
 
 .footer-heading{
   font-size:0.78rem;
-  color:#8FA4B2;
+  color:var(--navy);
   margin-bottom:14px;
-  font-weight:500;
+  font-weight:600;
 }
-.footer-contact li{ font-size:0.9rem; margin-bottom:9px; display:flex; gap:9px; }
+.footer-contact li{ font-size:0.9rem; margin-bottom:9px; display:flex; gap:9px; color:var(--ink-muted); }
 .footer-contact svg{ width:16px; height:16px; stroke:var(--teal); flex:none; margin-top:2px; }
 
 .footer-social{ display:flex; gap:10px; }
 .footer-social a{
   width:38px; height:38px;
-  border:1px solid #294961;
+  border:1px solid var(--footer-line);
   border-radius:50%;
   display:flex; align-items:center; justify-content:center;
   transition:border-color .15s ease, background .15s ease;
 }
-.footer-social a:hover{ border-color:var(--teal); background:rgba(22,150,166,0.15); }
-.footer-social svg{ width:17px; height:17px; stroke:#CBD8E0; }
+.footer-social a:hover{ border-color:var(--teal); background:rgba(22,150,166,0.12); }
+.footer-social svg{ width:17px; height:17px; stroke:var(--navy); }
 
 .footer-bottom{
-  border-top:1px solid #1B3A54;
+  border-top:1px solid var(--footer-line);
   padding:18px 0;
   font-size:0.78rem;
-  color:#7690A0;
+  color:var(--ink-muted);
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
@@ -403,6 +465,8 @@ footer.site-footer{
   .row-item{ grid-template-columns:1fr; gap:8px; }
   .row-item .row-date{ order:-1; }
   .menu-panel{ width:260px; }
+  .download-item{ flex-wrap:wrap; }
+  .download-btn{ margin-left:auto; }
 }
 
 @media (prefers-reduced-motion: reduce){

@@ -2,7 +2,7 @@
    MINGYING GEO — 網站邏輯 (app.js)
    ------------------------------------------------------------
    這個檔案負責：把 data.js 的內容畫到頁面上、選單開合、
-   以及切換上方四個分頁。一般不需要修改這個檔案，
+   以及切換上方分頁。一般不需要修改這個檔案，
    要換文字內容請改 data.js。
    ============================================================ */
 
@@ -19,7 +19,8 @@ const ICONS = {
   phone:    '<path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2Z"/>',
   email:    '<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 6.5 8 6.5 8-6.5"/>',
   facebook: '<path d="M15 8h-2a2 2 0 0 0-2 2v2H9v3h2v6h3v-6h2.2l.8-3H14v-1.5c0-.6.4-1 1-1h2V8Z"/>',
-  youtube:  '<rect x="2.5" y="6" width="19" height="12" rx="3.2"/><path d="M11 10.3v3.4l3-1.7-3-1.7Z" fill="currentColor" stroke="none"/>'
+  youtube:  '<rect x="2.5" y="6" width="19" height="12" rx="3.2"/><path d="M11 10.3v3.4l3-1.7-3-1.7Z" fill="currentColor" stroke="none"/>',
+  download: '<path d="M12 3v11m0 0-4-4m4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>'
 };
 
 function icon(name){
@@ -32,6 +33,11 @@ function icon(name){
 function esc(str){
   return String(str == null ? '' : str)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* 判斷是不是完整網址（http/https 開頭），是的話用新分頁開啟 */
+function isExternalLink(href){
+  return /^https?:\/\//i.test(href || '');
 }
 
 /* ---------- 各區塊渲染 ---------- */
@@ -83,12 +89,15 @@ function renderProducts(){
     return;
   }
   wrap.innerHTML = SITE_DATA.products.map(function(p){
-    return '<div class="product-card">' +
+    const href = p.link || '#';
+    const target = isExternalLink(href) ? ' target="_blank" rel="noopener"' : '';
+    return '<a class="product-card" href="' + esc(href) + '"' + target + '>' +
       '<span class="tag">' + esc(p.tag) + '</span>' +
       icon(p.icon) +
       '<h3>' + esc(p.title) + '</h3>' +
       '<p>' + esc(p.desc) + '</p>' +
-      '</div>';
+      '<span class="card-arrow" aria-hidden="true">\u2192</span>' +
+      '</a>';
   }).join('');
 }
 
@@ -100,11 +109,13 @@ function renderCases(){
     return;
   }
   wrap.innerHTML = SITE_DATA.cases.map(function(c){
-    return '<div class="row-item">' +
+    const href = c.link || '#';
+    const target = isExternalLink(href) ? ' target="_blank" rel="noopener"' : '';
+    return '<a class="row-item" href="' + esc(href) + '"' + target + '>' +
       '<span class="row-tag">' + esc(c.tag) + '</span>' +
       '<div><h3>' + esc(c.title) + '</h3><p>' + esc(c.desc) + '</p></div>' +
       '<span class="row-date">' + esc(c.date) + '</span>' +
-      '</div>';
+      '</a>';
   }).join('');
 }
 
@@ -121,6 +132,30 @@ function renderTutorials(){
       '<span class="row-tag">' + esc(t.level) + '</span>' +
       '<div><h3>' + esc(t.title) + '</h3><p>' + esc(t.desc) + '</p></div>' +
       '<a class="row-date" href="' + esc(t.link || '#') + '">閱讀文章</a>' +
+      '</div>';
+  }).join('');
+}
+
+function renderDownloads(){
+  const wrap = document.getElementById('downloadsList');
+  if(!wrap) return;
+  const list = SITE_DATA.downloads || [];
+  if(!list.length){
+    wrap.innerHTML = '<p class="empty-state">目前尚未提供下載項目。</p>';
+    return;
+  }
+  wrap.innerHTML = list.map(function(d){
+    const href = d.link || '#';
+    const meta = [d.version, d.size].filter(Boolean).join(' \u00B7 ');
+    return '<div class="download-item">' +
+      icon(d.icon) +
+      '<div class="download-info">' +
+        '<span class="tag">' + esc(d.tag) + '</span>' +
+        '<h3>' + esc(d.title) + '</h3>' +
+        '<p>' + esc(d.desc) + '</p>' +
+        (meta ? '<span class="download-meta">' + esc(meta) + '</span>' : '') +
+      '</div>' +
+      '<a class="download-btn" href="' + esc(href) + '" target="_blank" rel="noopener">下載</a>' +
       '</div>';
   }).join('');
 }
@@ -187,8 +222,8 @@ function setupMenu(){
   setupMenu.close = closeMenu;
 }
 
-/* ---------- 分頁切換（首頁／產品資訊／案件分享／GIS教學區／關於） ---------- */
-const VALID_VIEWS = ['home','products','cases','tutorials','about'];
+/* ---------- 分頁切換（首頁／產品資訊／案件分享／GIS教學區／程式下載／關於） ---------- */
+const VALID_VIEWS = ['home','products','cases','tutorials','download','about'];
 
 function showView(name){
   if(VALID_VIEWS.indexOf(name) === -1){ name = 'home'; }
@@ -233,6 +268,7 @@ document.addEventListener('DOMContentLoaded', function(){
   renderProducts();
   renderCases();
   renderTutorials();
+  renderDownloads();
   renderAbout();
   renderContact();
   setupMenu();
